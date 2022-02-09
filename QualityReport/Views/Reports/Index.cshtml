@@ -9,33 +9,23 @@
 @*<input type="text" name="Id" id="Id" />*@
 
 
-@using (Html.BeginForm("UserReportView", "Reports", FormMethod.Post))
+@using (Html.BeginForm("UserReportView", "Reports", FormMethod.Post, new { target = "_blank" }))
 {
     <p> Repeat Report:</p>
     <input id="UserToLookUp" type="text" width="50" name="UserToLookUp" />
-    @*@Html.TextBoxFor(model => model.UserToLookUp)*@
-
-    <input type="submit" value="View" target="_blank" />
-
-    <button onClick="javascript:windows.open(@TempData["repeatURL"]);" type="submit" target="_blank">open</button>
+    <input id="submit1" type="submit" value="submit" target="_blank" />
+    @*<button onClick="javascript:window.open(https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf);">open</button>*@
+    @*<input type="button" id="button2" value="View"/>*@
+    @*<button id="button1" onclick="NewTab()">open</button>*@
     <br>
-    <a href="localhost:44308/ReportOutput/QualityRepeatSummary.pdf" type="application/pdf" target="_blank">pdf2</a> @*should work*@
-
-    <p>Using TempData: @TempData["repeatURL"]</p>
+    <!--<a href="https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf" type="application/pdf" target="_blank">pdf2</a>--> @*should work*@
+    @*<a onClick="javascript:(window.open('https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf'))">test</a>
+        <p>Using TempData: @TempData["repeatURL"]</p>*@
 
 }
 
-<a asp-action="GetPdf" asp-controller="Reports">Download</a>
-<a asp-action="DownloadFileAsync" asp-controller="Reports">tryOpen</a>
+@*<a asp-action="DownloadReport" asp-controller="Reports" target="_blank">Download</a>*@
 
-<br>
-<a href='http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF&ProjectID=1601755' target="_blank">pdf</a>
-<br>
-<a href="localhost:44308/ReportOutput/QualityRepeatSummary.pdf" type="application/pdf" target="_blank">pdf2</a> @*should work*@
-<br>
-<a onClick="javascript:void(window.open('localhost:44308/ReportOutput/QualityRepeatSummary.pdf'))">test</a>
-<br>
-<button onclick="NewTab()">open2</button>
 <br>
 
 @using (Html.BeginForm("RankReportView", "Reports", FormMethod.Post))
@@ -79,12 +69,11 @@
 
 }
 
-<br>
 
 <script>
     function NewTab() {
-        window.open(
-            "localhost:44308/ReportOutput/QualityRepeatSummary.pdf", "_blank").focus();
+          window.open("https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf", "_blank").focus();
     }
+
 </script>
 

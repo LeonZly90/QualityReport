@@ -24,40 +24,10 @@ namespace Reports.Controllers
         }
 
 
-
-        [HttpGet]
-        public IActionResult Submit(string data)
-        {
-            ViewBag.UserToLookUp = data;
-            return View("Index", data);
-        }
-
-        //[HttpPost]
-        //public ActionResult UserReportView(EntryViewModel vm)
-        //{
-        //    //TempData["ID"] = vm.UserToLookUp;
-        //    var test = vm.UserToLookUp;
-
-        //    StringBuilder sbInterest = new StringBuilder();
-        //    sbInterest.Append("http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityRepeatSummary&rs:Command=Render&ProjectID=" + test  );
-
-        //    var data = Content(sbInterest.ToString());
-        //    return data;
-        //    //return RedirectToAction("someFunc", new { data=data });
-        //}
-
         [HttpPost]
         public ActionResult UserReportView(EntryViewModel vm)
         {
             var id = vm.UserToLookUp;
-            //var segment = string.Join(" ", id);
-            //var escapedSegment = Uri.EscapeDataString(segment);
-            //http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF
-            //var baseFormat = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityRepeatSummary&rs:Command=Render&ProjectID={0}";
-            //var baseFormat = "http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF&ProjectID={0}";
-            //var url = string.Format(baseFormat, escapedSegment);
-
-            //https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf
             string RepeatUrl = "http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF";
             RepeatUrl = QueryHelpers.AddQueryString(RepeatUrl, "ProjectID", id);
 
@@ -71,42 +41,19 @@ namespace Reports.Controllers
             var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
 
             System.IO.File.WriteAllBytes(url, myDataBuffer);
-            //if (System.IO.File.Exists(url) == true)
-            //{
-            //    //DO NOTHING
-            //}
-            //else
-            //{
-            //    System.IO.File.WriteAllBytes(url, myDataBuffer);
-            //    //SAVE FILE HERE
-            //}
 
-            return Redirect(RepeatUrl);
+            var ShowPage = "https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
+            return Redirect(ShowPage);
+            //return RedirectToAction("ShowPDF", "Reports");
         }
 
-        //"C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf"
-
-
-        [HttpGet]
-        public ActionResult GetPdf()
-        {
-            string filePath = "localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
-            Response.Headers.Add("Content-Disposition", "inline; filename=QualityRepeatSummary.pdf");
-            return File(filePath, "QualityRepeatSummary/pdf");
-        }
-
-        // Below method is going to convert file into byte array      
-        public async Task<byte[]> DownloadFileAsync()
-        {
-            string filepath = "localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
-            var directorypath = "localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
-            FileStream uploadFileStream = System.IO.File.OpenRead(filepath);
-
-            if (!Directory.Exists(directorypath)) return null;
-            if (!System.IO.File.Exists(filepath)) return null;
-            var bytes = await Task.Run(() => System.IO.File.ReadAllBytes(filepath));
-            return bytes;
-        }
+        //public FileResult DownloadReport()
+        //{
+        //    var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
+        //    string ReportURL = url;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(ReportURL);
+        //    return File(FileBytes, "application/pdf");
+        //}
 
         [HttpPost]
         public ActionResult RankReportView(EntryViewModel vm)
