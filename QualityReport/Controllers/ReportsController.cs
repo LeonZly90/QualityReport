@@ -30,30 +30,17 @@ namespace Reports.Controllers
             var id = vm.UserToLookUp;
             string RepeatUrl = "http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF";
             RepeatUrl = QueryHelpers.AddQueryString(RepeatUrl, "ProjectID", id);
-
-            TempData["repeatURL"]= RepeatUrl;
-
+                        
             WebClient Client = new WebClient(); ;
             Client.UseDefaultCredentials = true;
             byte[] myDataBuffer = Client.DownloadData(RepeatUrl);
-
             //var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary"+id+ DateTime.Now.ToString("_hhmmss") + ".pdf";
             var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
-
             System.IO.File.WriteAllBytes(url, myDataBuffer);
 
             var ShowPage = "https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
             return Redirect(ShowPage);
-            //return RedirectToAction("ShowPDF", "Reports");
         }
-
-        //public FileResult DownloadReport()
-        //{
-        //    var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
-        //    string ReportURL = url;
-        //    byte[] FileBytes = System.IO.File.ReadAllBytes(ReportURL);
-        //    return File(FileBytes, "application/pdf");
-        //}
 
         [HttpPost]
         public ActionResult RankReportView(EntryViewModel vm)

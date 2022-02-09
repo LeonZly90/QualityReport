@@ -14,24 +14,13 @@
     <p> Repeat Report:</p>
     <input id="UserToLookUp" type="text" width="50" name="UserToLookUp" />
     <input id="submit1" type="submit" value="submit" target="_blank" />
-    @*<button onClick="javascript:window.open(https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf);">open</button>*@
-    @*<input type="button" id="button2" value="View"/>*@
-    @*<button id="button1" onclick="NewTab()">open</button>*@
-    <br>
-    <!--<a href="https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf" type="application/pdf" target="_blank">pdf2</a>--> @*should work*@
-    @*<a onClick="javascript:(window.open('https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf'))">test</a>
-        <p>Using TempData: @TempData["repeatURL"]</p>*@
-
 }
-
-@*<a asp-action="DownloadReport" asp-controller="Reports" target="_blank">Download</a>*@
 
 <br>
 
 @using (Html.BeginForm("RankReportView", "Reports", FormMethod.Post))
 {
     <p>Rank Report:</p>
-    <br>
     <p>Company:</p>
     <input id="RankReport" type="text" width="50" name="Company" />
     <br>
@@ -71,9 +60,6 @@
 
 
 <script>
-    function NewTab() {
-          window.open("https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf", "_blank").focus();
-    }
 
 </script>
 
