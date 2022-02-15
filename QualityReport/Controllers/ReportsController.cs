@@ -12,38 +12,127 @@ using System.Net;
 using System.Threading.Tasks;
 using System.IO;
 using System.IO.IsolatedStorage;
+using QualityReport.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Reports.Controllers
 {
 
     public class ReportsController : Controller
     {
-        public IActionResult Index()
+        //private readonly ProjectNameRepeatContext _db;
+        //public IStoProc StoProc { get; private set; }
+        //public ReportsController(ProjectNameRepeatContext db)
+        //{
+        //    _db = db;
+        //    //StoProc = new StoProc(_db);
+        //}
+
+        //public async Task<IActionResult> ReportList()
+        //{
+        //    return View(await _db.Project.FromSqlRaw("select * from Project").ToListAsync());
+        //}
+        #region " ================== 02/14/2022 Repeat Summary ====================="
+
+        [HttpGet]
+        public IActionResult RepeatSummary()
         {
             return View();
         }
 
-
         [HttpPost]
-        public ActionResult UserReportView(EntryViewModel vm)
+        public ActionResult RepeatSummary(EntryViewModel vm)
         {
-            var id = vm.UserToLookUp;
+            var id = vm.RepeatProjectID;
             string RepeatUrl = "http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRepeatSummary&rs:Format=PDF";
             RepeatUrl = QueryHelpers.AddQueryString(RepeatUrl, "ProjectID", id);
                         
-            WebClient Client = new WebClient(); ;
+            WebClient Client = new WebClient();
             Client.UseDefaultCredentials = true;
             byte[] myDataBuffer = Client.DownloadData(RepeatUrl);
             //var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary"+id+ DateTime.Now.ToString("_hhmmss") + ".pdf";
-            var url = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
-            System.IO.File.WriteAllBytes(url, myDataBuffer);
+            var urlRepeat = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\QualityRepeatSummary.pdf";
+            System.IO.File.WriteAllBytes(urlRepeat, myDataBuffer);
 
-            var ShowPage = "https://localhost:44308/ReportOutput/QualityRepeatSummary.pdf";
+            var ShowPage = "/ReportOutput/QualityRepeatSummary.pdf";
             return Redirect(ShowPage);
+        }
+        #endregion
+
+        #region " ================== 02/15/2022 Root Cause Summary ====================="
+
+        [HttpGet]
+        public IActionResult RootCause()
+        {
+            return View();
         }
 
         [HttpPost]
-        public ActionResult RankReportView(EntryViewModel vm)
+        public ActionResult RootCause(EntryViewModel vm)
+        {
+            var id = vm.RootProjectID;
+            string RepeatUrl = "http://vmdatabase1/reportserver?%2fQualityApp%2fQualityRootCauseReport&rs:Format=PDF";
+            RepeatUrl = QueryHelpers.AddQueryString(RepeatUrl, "ProjectID", id);
+
+            WebClient Client = new WebClient();
+            Client.UseDefaultCredentials = true;
+            byte[] myDataBuffer = Client.DownloadData(RepeatUrl);
+            var urlRepeat = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\RootCauseReport.pdf";
+            System.IO.File.WriteAllBytes(urlRepeat, myDataBuffer);
+
+            var ShowPage = "/ReportOutput/RootCauseReport.pdf";
+            return Redirect(ShowPage);
+        }
+        #endregion
+
+        #region " ================== 02/15/2022 Root Cause Summary ====================="
+
+        [HttpGet]
+        public IActionResult ComparisonReport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ComparisonReport(EntryViewModel vm)
+        {
+            var location = vm.ComparisonCompany;
+            var ComparisonTradeNo = vm.ComparisonTradeNo;
+            var Company1 = vm.Company1;
+            var Company2 = vm.Company2;
+            var Company3 = vm.Company3;
+            var Company4 = vm.Company4;
+            var Company5 = vm.Company5;
+
+            string ComparisonUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityCpmpareReport&rs:Format=PDF";
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Trade_No", ComparisonTradeNo);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Company", location);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name1", Company1);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name2", Company2);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name3", Company3);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name4", Company4);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name5", Company5);
+
+            WebClient Client = new WebClient();
+            Client.UseDefaultCredentials = true;
+            byte[] myDataBuffer = Client.DownloadData(ComparisonUrl);
+            var urlComparison = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\ComparisonReport.pdf";
+            System.IO.File.WriteAllBytes(urlComparison, myDataBuffer);
+
+            var ShowPage = "/ReportOutput/ComparisonReport.pdf";
+            return Redirect(ShowPage);
+        }
+        #endregion
+
+        #region " ================== 02/14/2022 RankReport ====================="
+
+        [HttpGet]
+        public IActionResult RankReport()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RankReport(EntryViewModel vm)
         {
             var company = vm.Company;
             var div = vm.Div;
@@ -52,13 +141,16 @@ namespace Reports.Controllers
             var endDate = vm.EndDate.ToString();
             var report = vm.Report;
             var name1 = vm.Name1;
+            if (name1 == null)
+            {
+                name1 = "IsNull = True";
+            }
             var name2 = vm.Name2;
             var name3 = vm.Name3;
             var name4 = vm.Name4;
             var name5 = vm.Name5;
 
-            //&Div=09&SubDiv=20&StartDate=2020-01-01&EndDate=2022-02-01&Company=PCC&C_name1=1086&C_name2=4172&C_name3=2091&C_name4=4236&C_name5=7&i=r
-            string RankUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityDrillDown_all&rs:Command=Render";
+            string RankUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityDrillDown_all&rs:Format=PDF";
 
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "Div", div);
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "SubDiv", subDiv);
@@ -73,18 +165,28 @@ namespace Reports.Controllers
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "i", report);
 
             //C_name1=1086&C_name2=4172&C_name3=2091&C_name4=4236&C_name5=7
-            return Redirect(RankUrl);
-        }
+            WebClient Client = new WebClient();
+            Client.UseDefaultCredentials = true;
+            byte[] myDataBuffer = Client.DownloadData(RankUrl);
 
-        public IActionResult ReportList(string project, int ID = 7) //https://localhost:44308/Reports/Quality?name=Leon&numTImes=100
-        {
+            var urlRepeat = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\DrillDownRank.pdf";
+            System.IO.File.WriteAllBytes(urlRepeat, myDataBuffer);
 
-            //return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
-            ViewData["ID"] = ID;
-            ViewData["Project"] = "Project Name: " + project;
-            
-            return View();
+            var ShowPage = "/ReportOutput/DrillDownRank.pdf";
+            return Redirect(ShowPage);
+            //return Redirect(RankUrl);
         }
+        #endregion
+
+        //public IActionResult ReportList(string project, int ID = 7) //https://localhost:44308/Reports/Quality?name=Leon&numTImes=100
+        //{
+
+        //    //return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
+        //    ViewData["ID"] = ID;
+        //    ViewData["Project"] = "Project Name: " + project;
+
+        //    return View();
+        //}
 
 
     }

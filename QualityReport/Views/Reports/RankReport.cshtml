@@ -1,65 +1,53 @@
 ﻿@{
-    ViewData["Title"] = "Quality Report";
+    ViewData["Title"] = "Rank Report Report";
 }
 @model QualityReport.Models.EntryViewModel
 
-<h2>Quality Report</h2>
-
-
-@*<input type="text" name="Id" id="Id" />*@
-
-
-@using (Html.BeginForm("UserReportView", "Reports", FormMethod.Post, new { target = "_blank" }))
+@using (Html.BeginForm("RankReport", "Reports", FormMethod.Post, new { target = "_blank" }))
 {
-    <p> Repeat Report:</p>
-    <input id="UserToLookUp" type="text" width="50" name="UserToLookUp" />
-    <input id="submit1" type="submit" value="submit" target="_blank" />
-}
-
-<br>
-
-@using (Html.BeginForm("RankReportView", "Reports", FormMethod.Post))
-{
-    <p>Rank Report:</p>
-    <p>Company:</p>
+    <p>Company:(PCC/PCCI/PCCO)</p>
     <input id="RankReport" type="text" width="50" name="Company" />
     <br>
-    <p>Div:</p>
+    <br>
+    <p>Div: (eg: 09)</p>
     <input id="RankReport" type="text" width="50" name="Div" />
     <br>
-    <p>SubDiv:</p>
+    <br>
+    <p>SubDiv: (eg: 20)</p>
     <input id="RankReport" type="text" width="50" name="SubDiv" />
     <br>
-    <p>StartDate:</p>
+    <br>
+    <p>StartDate: (01/01/2020)</p>
     <input id="RankReport" type="date" width="50" name="StartDate" />
     <br>
-    <p>EndDate:</p>
+    <br>
+    <p>EndDate: (01/01/2022)</p>
     <input id="RankReport" type="date" width="50" name="EndDate" />
     <br>
-    <p>Report:</p>
+    <br>
+    <p>Report type (choose i/r/p/f or all) (i=issue, r=repeat, p=priority talk, f=forman):</p>
     <input id="RankReport" type="text" width="50" name="Report" />
     <br>
-    <p>Name1:</p>
+    <br>
+    <p>Name1: '1086'</p>
     <input id="RankReport" type="text" width="50" name="Name1" />
     <br>
-    <p>Name2:</p>
+    <br>
+    <p>Name2: '4172'</p>
     <input id="RankReport" type="text" width="50" name="Name2" />
     <br>
-    <p>Name3:</p>
+    <br>
+    <p>Name3: '2091'</p>
     <input id="RankReport" type="text" width="50" name="Name3" />
     <br>
-    <p>Name4:</p>
+    <br>
+    <p>Name4: '4236'</p>
     <input id="RankReport" type="text" width="50" name="Name4" />
     <br>
-    <p>Name5:</p>
+    <br>
+    <p>Name5: '7'</p>
     <input id="RankReport" type="text" width="50" name="Name5" />
 
-    <input type="submit" value="View" formtarget="_blank" />
+    <input type="submit" value="submit" />
 
 }
-
-
-<script>
-
-</script>
-

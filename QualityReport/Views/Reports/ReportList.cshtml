@@ -1,12 +1,16 @@
-﻿@{
+﻿@model IEnumerable<ProjectNameRepeatContext>
+
+@{
     ViewData["Title"] = "Reports";
 }
 
 <h2>Report List</h2>
 
-<ul>
+@*<ul>
     @for (int i = 0; i < (int)ViewData["ID"]; i++)
     {
         <li>@ViewData["Project"]</li>
     }
-</ul>
+</ul>*@
+
+ @Html.DisplayNameFor(model => model.ProjectNameRepeat)

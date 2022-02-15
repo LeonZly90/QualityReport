@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Comparison Report";
+}
+@model QualityReport.Models.EntryViewModel
+
+@using (Html.BeginForm("ComparisonReport", "Reports", FormMethod.Post, new { target = "_blank" }))
+{
+    <p>Comparison Report:</p>
+    <br>
+    <p>Location:(PCC/PCCI/PCCO)</p>
+    <input type="text" width="50" name="ComparisonCompany" />
+    <br>
+    <br>
+    <p>SubDiv: (eg: 20)</p>
+    <input type="text" width="50" name="ComparisonTradeNo" />
+    <br>
+    <br>
+    <p>Name1: '1402148'</p>
+    <input type="text" width="50" name="Company1" />
+    <br>
+    <br>
+    <p>Name2: '1501256'</p>
+    <input type="text" width="50" name="Company2" />
+    <br>
+    <br>
+    <p>Name3: '1800092'</p>
+    <input type="text" width="50" name="Company3" />
+    <br>
+    <br>
+    <p>Name4: '1500256'</p>
+    <input type="text" width="50" name="Company4" />
+    <br>
+    <br>
+    <p>Name5: '1601712'</p>
+    <input type="text" width="50" name="Company5" />
+
+    <input type="submit" value="submit" />
+}

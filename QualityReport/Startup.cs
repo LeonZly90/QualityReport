@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QualityReport.Utility;
 using Microsoft.EntityFrameworkCore;
+using QualityReport.Models;
 
 
 namespace QualityReport
@@ -28,7 +29,7 @@ namespace QualityReport
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.Configure<QualityReportURL>(Configuration.GetSection("SSRS_Report_URL_QualityRepeatSummary"));
+            services.AddDbContext<ProjectNameRepeatContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PepperLocal")));
 
             //DWConnectionString = Configuration.GetSection("ConnectionStrings:DWConnectionString").Value;
         }

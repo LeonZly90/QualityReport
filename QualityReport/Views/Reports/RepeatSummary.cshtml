@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Repeat Summary Report";
+}
+@model QualityReport.Models.EntryViewModel
+
+@*<input type="text" name="Id" id="Id" />*@
+
+
+@using (Html.BeginForm("RepeatSummary", "Reports", FormMethod.Post, new { target = "_blank" }))
+{
+    <p> Repeat Report:</p>
+    <input type="text" width="50" name="RepeatProjectID" />
+    <input type="submit" value="submit" />
+}
+
+<script>
+
+</script>
+

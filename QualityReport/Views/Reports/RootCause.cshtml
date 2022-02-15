@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Root Cause Report";
+}
+@model QualityReport.Models.EntryViewModel
+
+@using (Html.BeginForm("RootCause", "Reports", FormMethod.Post, new { target = "_blank" }))
+{
+    <p> Root Cause Report:</p>
+    <input type="text" width="50" name="RootProjectID" />
+    <input type="submit" value="submit" />
+}
