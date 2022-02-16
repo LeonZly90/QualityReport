@@ -17,11 +17,27 @@ namespace QualityReport.Models
         //Comparison Report
         public string ComparisonCompany { get; set; }
         public string ComparisonTradeNo { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        [Required(AllowEmptyStrings = true)]
         public string Company1 { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        [Required(AllowEmptyStrings = true)]
         public string Company2 { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        [Required(AllowEmptyStrings = true)]
         public string Company3 { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        [Required(AllowEmptyStrings = true)]
         public string Company4 { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        [Required(AllowEmptyStrings = true)]
         public string Company5 { get; set; }
+        //Drill Down
 
         //Rank Report
         public string Company { get; set; }

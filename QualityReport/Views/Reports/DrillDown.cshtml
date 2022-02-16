@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Drill Down Report";
+}
+@model QualityReport.Models.EntryViewModel
+
+@using (Html.BeginForm("DrillDown", "Reports", FormMethod.Post, new { target = "_blank" }))
+{
+    <p>Company:(PCC/PCCI/PCCO)</p>
+    <input type="text" width="50" name="Company" />
+    <br>
+    <br>
+    <p>Div: (eg: 09)</p>
+    <input type="text" width="50" name="Div" />
+    <br>
+    <br>
+    <p>SubDiv: (eg: 20)</p>
+    <input type="text" width="50" name="SubDiv" />
+    <br>
+    <br>
+    <p>StartDate: (01/01/2020)</p>
+    <input type="date" width="50" name="StartDate" />
+    <br>
+    <br>
+    <p>EndDate: (01/01/2022)</p>
+    <input type="date" width="50" name="EndDate" />
+
+    <input type="submit" value="submit" />
+}

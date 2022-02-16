@@ -84,8 +84,8 @@ namespace Reports.Controllers
             return Redirect(ShowPage);
         }
         #endregion
-
-        #region " ================== 02/15/2022 Root Cause Summary ====================="
+       
+        #region " ================== 02/16/2022 Comparison Summary ====================="
 
         [HttpGet]
         public IActionResult ComparisonReport()
@@ -120,6 +120,43 @@ namespace Reports.Controllers
             System.IO.File.WriteAllBytes(urlComparison, myDataBuffer);
 
             var ShowPage = "/ReportOutput/ComparisonReport.pdf";
+            return Redirect(ShowPage);
+        }
+        #endregion
+
+        #region " ================== 02/16/2022 Drill Down Report ====================="
+
+        [HttpGet]
+        public IActionResult DrillDown()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DrillDown(EntryViewModel vm)
+        {
+            var company = vm.Company;
+            var div = vm.Div;
+            var subDiv = vm.SubDiv;
+            var startDate = vm.StartDate.ToString();
+            var endDate = vm.EndDate.ToString();
+
+            //http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fReport1&rs:Command=Render&Company=PCC&Div=05&SubDiv=20&StartDate=2020-01-01&EndDate=2022-01-01
+
+            string DrillDownUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fReport1&rs:Format=PDF";
+            DrillDownUrl = QueryHelpers.AddQueryString(DrillDownUrl, "Div", div);
+            DrillDownUrl = QueryHelpers.AddQueryString(DrillDownUrl, "SubDiv", subDiv);
+            DrillDownUrl = QueryHelpers.AddQueryString(DrillDownUrl, "StartDate", startDate);
+            DrillDownUrl = QueryHelpers.AddQueryString(DrillDownUrl, "EndDate", endDate);
+            DrillDownUrl = QueryHelpers.AddQueryString(DrillDownUrl, "Company", company);
+
+            WebClient Client = new WebClient();
+            Client.UseDefaultCredentials = true;
+            byte[] myDataBuffer = Client.DownloadData(DrillDownUrl);
+            var urlDrillDown = "C:\\PepperPepper\\Quality\\QualityReport\\QualityReport\\wwwroot\\ReportOutput\\DrillDownReport.pdf";
+            System.IO.File.WriteAllBytes(urlDrillDown, myDataBuffer);
+
+            var ShowPage = "/ReportOutput/DrillDownReport.pdf";
             return Redirect(ShowPage);
         }
         #endregion
