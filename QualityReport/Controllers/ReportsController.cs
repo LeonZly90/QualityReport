@@ -98,20 +98,23 @@ namespace Reports.Controllers
         {
             var location = vm.ComparisonCompany;
             var ComparisonTradeNo = vm.ComparisonTradeNo;
-            var Company1 = vm.Company1;
-            var Company2 = vm.Company2;
-            var Company3 = vm.Company3;
-            var Company4 = vm.Company4;
-            var Company5 = vm.Company5;
+            var CompanyList = vm.CompanyList;
+
+            //var Company1 = vm.Company1;
+            //var Company2 = vm.Company2;
+            //var Company3 = vm.Company3;
+            //var Company4 = vm.Company4;
+            //var Company5 = vm.Company5;
 
             string ComparisonUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityCpmpareReport&rs:Format=PDF";
             ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Trade_No", ComparisonTradeNo);
             ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Company", location);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name1", Company1);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name2", Company2);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name3", Company3);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name4", Company4);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name5", Company5);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID", CompanyList);
+            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name1", Company1);
+            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name2", Company2);
+            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name3", Company3);
+            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name4", Company4);
+            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name5", Company5);
 
             WebClient Client = new WebClient();
             Client.UseDefaultCredentials = true;

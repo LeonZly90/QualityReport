@@ -20,23 +20,23 @@ namespace QualityReport.Models
 
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(AllowEmptyStrings = true)]
-        public string Company1 { get; set; }
+        public string CompanyList { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Company2 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Company2 { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Company3 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Company3 { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Company4 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Company4 { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Company5 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Company5 { get; set; }
         //Drill Down
 
         //Rank Report
