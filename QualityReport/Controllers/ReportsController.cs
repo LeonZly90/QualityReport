@@ -98,23 +98,27 @@ namespace Reports.Controllers
         {
             var location = vm.ComparisonCompany;
             var ComparisonTradeNo = vm.ComparisonTradeNo;
-            var CompanyList = vm.CompanyList;
+            var ProjectList = vm.CompanyList;
+            //ProjectList = ProjectList.Trim(',');
+            //ProjectList = Request.Form["demo"];
+            //'1402148','1501256','1800092', '1500256','1601712'
+            //--->'1402148,1501256,1500256,1800092,1601712'
 
-            //var Company1 = vm.Company1;
-            //var Company2 = vm.Company2;
-            //var Company3 = vm.Company3;
-            //var Company4 = vm.Company4;
-            //var Company5 = vm.Company5;
+            //var ListName = new List<string>();
+            //ListName.Add(ProjectList);
+            //TempData["Lists"] = ProjectList;
+            //if (ProjectList != null)
+            //{
+            //    ProjectList += "<b>You selected:</b><br>";
+            //    ProjectList = string.Join(",", ProjectList);              
+            //    //ListName.Add(",");
+            //    //ListName.Add(ProjectList);
+            //}
 
             string ComparisonUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityCpmpareReport&rs:Format=PDF";
             ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Trade_No", ComparisonTradeNo);
             ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "Company", location);
-            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID", CompanyList);
-            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name1", Company1);
-            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name2", Company2);
-            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name3", Company3);
-            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name4", Company4);
-            //ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID_or_Name5", Company5);
+            ComparisonUrl = QueryHelpers.AddQueryString(ComparisonUrl, "ProjectID", ProjectList);
 
             WebClient Client = new WebClient();
             Client.UseDefaultCredentials = true;
@@ -125,6 +129,8 @@ namespace Reports.Controllers
             var ShowPage = "/ReportOutput/ComparisonReport.pdf";
             return Redirect(ShowPage);
         }
+
+
         #endregion
 
         #region " ================== 02/16/2022 Drill Down Report ====================="
@@ -180,15 +186,15 @@ namespace Reports.Controllers
             var startDate = vm.StartDate.ToString();
             var endDate = vm.EndDate.ToString();
             var report = vm.Report;
-            var name1 = vm.Name1;
-            if (name1 == null)
-            {
-                name1 = "IsNull = True";
-            }
-            var name2 = vm.Name2;
-            var name3 = vm.Name3;
-            var name4 = vm.Name4;
-            var name5 = vm.Name5;
+            var name = vm.Name;
+            //if (name1 == null)
+            //{
+            //    name1 = "IsNull = True";
+            //}
+            //var name2 = vm.Name2;
+            //var name3 = vm.Name3;
+            //var name4 = vm.Name4;
+            //var name5 = vm.Name5;
 
             string RankUrl = "http://vmdatabase1/reportserver/Pages/ReportViewer.aspx?%2fQualityApp%2fQualityDrillDown_all&rs:Format=PDF";
 
@@ -197,11 +203,11 @@ namespace Reports.Controllers
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "StartDate", startDate);
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "EndDate", endDate);
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "Company", company);
-            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name1", name1);
-            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name2", name2);
-            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name3", name3);
-            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name4", name4);
-            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name5", name5);
+            RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name", name);
+            //RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name2", name2);
+            //RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name3", name3);
+            //RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name4", name4);
+            //RankUrl = QueryHelpers.AddQueryString(RankUrl, "C_name5", name5);
             RankUrl = QueryHelpers.AddQueryString(RankUrl, "i", report);
 
             //C_name1=1086&C_name2=4172&C_name3=2091&C_name4=4236&C_name5=7

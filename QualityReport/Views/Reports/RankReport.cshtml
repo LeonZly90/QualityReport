@@ -29,25 +29,29 @@
     <input id="RankReport" type="text" width="50" name="Report" />
     <br>
     <br>
-    <p>Name1: '1086'</p>
-    <input id="RankReport" type="text" width="50" name="Name1" />
-    <br>
-    <br>
-    <p>Name2: '4172'</p>
-    <input id="RankReport" type="text" width="50" name="Name2" />
-    <br>
-    <br>
-    <p>Name3: '2091'</p>
-    <input id="RankReport" type="text" width="50" name="Name3" />
-    <br>
-    <br>
-    <p>Name4: '4236'</p>
-    <input id="RankReport" type="text" width="50" name="Name4" />
-    <br>
-    <br>
-    <p>Name5: '7'</p>
-    <input id="RankReport" type="text" width="50" name="Name5" />
+    <p>Name: '1086,4172,2091,4236,7'</p>
 
-    <input type="submit" value="submit" />
+    <p><input type="text" id="myText" name="demo">
+    <button type="button" onclick="myFunction()">Add</button></p>
+    <p>You select:</p>
+    <p id="CompanyList"></p>
+
+    <input id="abc" type="hidden" width="50" name="Name" value =""/>
+    <br>
+    <br>
+    <input type="submit" value="submit" onclick="myFunction2()"/>
 
 }
+
+    <script>
+      
+    // Here the value is stored in new variable x 
+    function myFunction() {
+        var x = document.getElementById("myText").value;
+        document.getElementById("CompanyList").innerHTML += x + ',';
+    }
+    function myFunction2() {
+        var xx = document.getElementById("CompanyList").innerHTML;
+        document.getElementById("abc").value = xx;
+    }
+    </script>

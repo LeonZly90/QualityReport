@@ -53,18 +53,18 @@ namespace QualityReport.Models
 
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(AllowEmptyStrings = true)]
-        public string Name1 { get; set; }
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Name2 { get; set; }
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Name3 { get; set; }
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Name4 { get; set; }
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [Required(AllowEmptyStrings = true)]
-        public string Name5 { get; set; }
+        public string Name { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Name2 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Name3 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Name4 { get; set; }
+        //[DisplayFormat(ConvertEmptyStringToNull = false)]
+        //[Required(AllowEmptyStrings = true)]
+        //public string Name5 { get; set; }
     }
 }
